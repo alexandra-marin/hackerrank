@@ -25,3 +25,32 @@
 // }
 
 // #2
+function substrCount(n, s) {
+    let counter = n; // all one letter combos by default
+
+    for (var i = 0; i < n; i++) {
+        //Part-1: Odd Number palindromes
+        // in 'aabaa', i = 2
+        // check 'AbA', then
+        // check AabaA, etc
+        let start = i - 1, end = i + 1, first = s[i - 1];
+        while (start >= 0 && end < n) {
+            if (s[start] === first && s[end] === first) {
+                counter++;
+                start--;
+                end++;
+            } else {
+                break;
+            }
+        }
+
+        //Part-2: Even Number repetitions
+        // 7 occurences -> 7 / 2 = 3 possible strings (a, aa, aaa)
+        let k = 1;
+        while (s[i + k] === s[i] && (i + k) <= n) {
+            k++
+        }
+        counter += Math.floor(k / 2);
+    }
+    return counter;
+}

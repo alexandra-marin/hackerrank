@@ -55,3 +55,47 @@
 //   2
 //   [Map Iterator] { 2, 3 } key 
 //   [Map Iterator] { 7, 1 } val
+
+//aaaabbcc - 4 x a, 2 x b, 2 x c
+//keys 4, 2
+//values 1, 2
+
+function isValid(s) {
+    let aMap = new Map();
+    s.split('').forEach(word => {
+        let prevVal = aMap.get(word) || 0;
+        aMap.set(word, prevVal + 1);
+    });
+
+    let freqMap = new Map();
+    [...aMap.values()].forEach(word => {
+        let prevVal = freqMap.get(word) || 0;
+        freqMap.set(word, prevVal + 1);
+    });
+
+    if (freqMap.size < 2) return "YES"
+    if (freqMap.size > 2) return "NO"
+    if (freqMap.size === 2) {
+        var [v1, v2] = [...freqMap.values()];
+        var [k1, k2] = [...freqMap.keys()];
+
+        let maxKey = Math.max(k1, k2)
+        let minKey = Math.min(k1, k2)
+
+        // case 1: can remove 1 letter from the greater word
+        // [Map Iterator] { 2, 3 } key 
+        // [Map Iterator] { 7, 1 } val
+        if (maxKey - minKey == 1 && freqMap.get(maxKey) == 1) {
+            return "YES"
+        }
+        else {
+            // case 2: there is exactly 1 word of 1 leter
+            //   [Map Iterator] { 111, 1 } key
+            //   [Map Iterator] { 9, 1 } val
+            if (minKey == 1 && freqMap.get(minKey) == 1)
+                return "YES"
+        }
+    }
+
+    return "NO";
+}
