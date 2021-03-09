@@ -47,13 +47,13 @@ function freqQuery(queries) {
     queries.map(([op, num]) => {
         let prevVal = data.get(num) || 0;
         let prevFreq = freqencies[prevVal] || 0;
-        let prevFreqP = freqencies[prevVal + 1] || 0;
-        let prevFreqM = freqencies[prevVal - 1] || 0;
+        let prevFreqPlus = freqencies[prevVal + 1] || 0;
+        let prevFreqMinus = freqencies[prevVal - 1] || 0;
 
         if (op === 1) {
             data.set(num, prevVal + 1);
 
-            freqencies[prevVal + 1] = prevFreqP + 1
+            freqencies[prevVal + 1] = prevFreqPlus + 1
             freqencies[prevVal] = prevFreq - 1
         }
 
@@ -61,7 +61,7 @@ function freqQuery(queries) {
             if (prevVal && prevVal > 0) {
                 data.set(num, prevVal - 1);
 
-                freqencies[prevVal - 1] = prevFreqM + 1
+                freqencies[prevVal - 1] = prevFreqMinus + 1
                 freqencies[prevVal] = prevFreq - 1
             }
         }

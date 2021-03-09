@@ -44,6 +44,10 @@
 //     return counter;
 // }
 
+// start to construct substrings
+// sort letters in each substring
+// add it to a hash
+// compare each new substring with existing in hash
 function sherlockAndAnagrams(s) {
     let counter = 0;
     const length = s.length;
@@ -52,8 +56,8 @@ function sherlockAndAnagrams(s) {
     for (var i = 1; i <= length - 1; i++) {
         let found = {};
 
-        for (var ind = 0; ind <= s.length - i; ind++) {
-            let sub = s.substring(ind, ind + i);
+        for (var j = 0; j <= s.length - i; j++) {
+            let sub = s.substring(j, j + i);
             let sorted = sub.split('').sort().join();
             console.log(sorted)
             if (found[sorted]) {

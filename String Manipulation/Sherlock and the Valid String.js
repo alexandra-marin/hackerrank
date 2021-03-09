@@ -62,15 +62,15 @@
 
 function isValid(s) {
     let aMap = new Map();
-    s.split('').forEach(word => {
-        let prevVal = aMap.get(word) || 0;
-        aMap.set(word, prevVal + 1);
+    s.split('').forEach(letter => {
+        let prevVal = aMap.get(letter) || 0;
+        aMap.set(letter, prevVal + 1);
     });
 
     let freqMap = new Map();
-    [...aMap.values()].forEach(word => {
-        let prevVal = freqMap.get(word) || 0;
-        freqMap.set(word, prevVal + 1);
+    [...aMap.values()].forEach(length => {
+        let prevVal = freqMap.get(length) || 0;
+        freqMap.set(length, prevVal + 1);
     });
 
     if (freqMap.size < 2) return "YES"

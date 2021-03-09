@@ -20,6 +20,11 @@
 
 // }
 
+
+// # 2 
+// keep a map of all values that come before and after current one
+// compute series based on current value and look for it in the maps
+
 // function countTriplets(arr, r) {
 //     let counter = 0;
 //     let beforeMap = new Map();
@@ -52,35 +57,37 @@
 //     return counter;
 // }
 
-// ???
+// #3
 // arr = 1 4 16 64, n = 4
 
-// i      n       rn        map2        map3        count
-// 0      (1)      4        1 -> 0      
-//                          4 -> 1      
-// 1      4        16       4 -> 1      16 -> 1
+// i      curr     next     map2        map3        count
+// 0      1        4        4 -> 1      
+// 1      4        16       4 -> 1      
 //                          16 -> 1
 // 2      16       64       16 -> 1     64 -> 1         1
 // 3      64       256      256 -> 1                    2
 
-function countTriplets(arr, r) {
+function countTriplets(arr, ratio) {
     var map2 = {};
     var map3 = {};
     var count = 0;
 
     for (var i = 0; i < arr.length; ++i) {
-        var n = arr[i];
-        var rn = r * n;
+        var curr = arr[i];
+        var next = ratio * curr;
 
-        if (map3[n]) {
-            count += map3[n];
+        // current is the third number in serie
+        if (map3[curr]) {
+            count += map3[curr];
         }
 
-        if (map2[n]) {
-            map3[rn] = map3[rn] ? map3[rn] + map2[n] : map2[n];
+        // current is the second number in serie
+        if (map2[curr]) {
+            map3[next] = map3[next] ? map3[next] + map2[curr] : map2[curr];
         }
 
-        map2[rn] = map2[rn] ? map2[rn] + 1 : 1;
+        // add the next value we should look for
+        map2[next] = map2[next] ? map2[next] + 1 : 1;
     }
 
     return count;

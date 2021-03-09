@@ -38,7 +38,5 @@ function computeSumForRowAndCol(arr, row, col) {
     sum += arr[row + 1][col + 2];
     sum += arr[row + 2][col + 2];
 
-    console.log(row, col, sum, arr[row + 1][col + 2])
-
     return sum;
 }
